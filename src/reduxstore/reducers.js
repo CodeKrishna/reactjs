@@ -1,6 +1,9 @@
 
 //Reducers always have two params state and action
-var dmart = function(state,action){
+var dmart = function(state={
+    user:null,
+    cartData:[]
+},action){
     switch (action.type) {
         case "LOGIN":{
             state = {...state}

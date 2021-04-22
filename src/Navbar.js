@@ -82,7 +82,7 @@ export default connect(function (state,props) {
     //and props means the data of Login Component
     console.log("Comes in Navbar",state)
     return{
-        userName:state && state['user']['name'],
-        checkIsLoggedIn:state && state.isloggedin
+        userName:state && state?.user?.name,
+        checkIsLoggedIn:state && state?.isloggedin
     }
 })(withRouter(Navbar))

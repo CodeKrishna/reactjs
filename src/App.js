@@ -27,10 +27,10 @@ function App(props) {
   //   setLoginStatus(data.isLoggedIn);
   // }
   useEffect(() => {
-    document.title = `Cake Shop | ${props.user?.name || "App"}`;
+    // document.title = `Cake Shop | ${props.user?.name || "App"}`;
 
-    if (localStorage.token && !props.user) {
-      var token = localStorage.token;
+    var token = localStorage.token;
+    if (token && !props.user) {
       let getuserapi = "https://apibyashu.herokuapp.com/api/getuserdetails";
       axios({
         url: getuserapi,

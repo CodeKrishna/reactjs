@@ -9,35 +9,35 @@ function Cart(props) {
   console.log("Cart Props >>> ");
   console.log(props);
   const shoppingCart = <FontAwesomeIcon icon={faShoppingCart}/>
-  const [cartData, setCartData] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  // const [cartData, setCartData] = useState([]);
+  // const [totalPrice, setTotalPrice] = useState(0);
   // setCartData(props.cartData);
-  useEffect(() => {
-    let detailsapiurl = "https://apibyashu.herokuapp.com/api/cakecart";
-    axios({
-      url: detailsapiurl,
-      method: "post",
-      data: {},
-      headers: {
-        authtoken: props.token,
-      },
-    })
-      .then((response) => {
-        console.log("cart data", response.data);
-        // setCartData(response.data.data);
-        var total = 0;
-        response.data.data.map(({ price }) => {
-          total = total + price;
-        });
-        props.dispatch({
-          type:"CAKES_CART",
-          payload:response.data.data,
-          total:total
-      })
-        // setTotalPrice(total);
-      })
-      .catch((error) => console.log(error));
-  }, [props.token]);
+  // useEffect(() => {
+  //   let detailsapiurl = "https://apibyashu.herokuapp.com/api/cakecart";
+  //   axios({
+  //     url: detailsapiurl,
+  //     method: "post",
+  //     data: {},
+  //     headers: {
+  //       authtoken: props.token,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       console.log("cart data", response.data);
+  //       // setCartData(response.data.data);
+  //       var total = 0;
+  //       response.data.data.map(({ price }) => {
+  //         total = total + price;
+  //       });
+  //       props.dispatch({
+  //         type:"CAKES_CART",
+  //         payload:response.data.data,
+  //         total:total
+  //     })
+  //       // setTotalPrice(total);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, [props.token]);
 
   function removeProductFromCart(cakeid, index){
     let removeCartApi = "https://apibyashu.herokuapp.com/api/removecakefromcart"
@@ -147,20 +147,11 @@ function Cart(props) {
             </div>
           </>
         ) : (
-          <div className="alert alert-danger container" role="alert">
+          <div className="alert alert-light container" role="alert">
             <h4 className="alert-heading" style={{ textAlign: "center" }}>
-              CART IS EMPTY!
+              Your Cart is empty!
             </h4>
             <hr />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p>
-                Plaese add some cake to cart{!props?.token && ", Please login"}
-              </p>
-
-              <p className="mb-0">
-                Sweet Shopping!
-              </p>
-            </div>
           </div>
         )}
       </div>
@@ -171,10 +162,11 @@ function Cart(props) {
 export default connect(function (state, props) {
   console.log('Cart Data >>> ',state);
   console.log('Cart Props >>> ',props);
-  let cd = state?.cartData;
+  var cartData = state?.cartData;
+  
   return {
     token: state?.user?.token,
-    cartData:[...cd],
+    cartData:[...cartData],
     total:state?.total
   };
 })(Cart);
