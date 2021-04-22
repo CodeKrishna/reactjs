@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "jquery/dist/jquery.slim.min";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./reduxstore/store";
+import { Provider } from 'react-redux';
+import dmart from "./reduxstore/store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={dmart}>
+      <App ></App>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
